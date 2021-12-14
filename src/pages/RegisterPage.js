@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../auth/AuthContext'
 import { useFormRegister } from '../hooks/useFormRegister'
 
 

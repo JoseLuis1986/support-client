@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../auth/AuthContext';
 import { ChatPage } from '../pages/ChatPage';
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';

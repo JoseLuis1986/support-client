@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
 
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../auth/AuthContext';
 import { useForm } from '../hooks/useForm';
 
 export const LoginPage = () => {

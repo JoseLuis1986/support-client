@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './auth/AuthContext';
 import { SocketProvider } from './context/SocketContext';
 import { AppRouter } from './router/AppRouter';
 
