@@ -1,0 +1,66 @@
+ .row {
+    padding-top: 5%;
+}
+
+.wrapper {
+    margin: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+
+.card {
+    /* max-width: 15%; */
+    margin: 5px;
+    box-shadow: 0 0 10px darkgreen !important;
+}
+
+.card-header {
+    margin: 0;
+}
+.card-footer {
+    flex-grow: inherit;
+}
+
+.col-md-3 {
+    flex: 1;
+    display:table-row;
+} 
+.card-img {
+    width: 100%;
+    height: 5vw;
+    object-fit: cover;
+}
+
+.card-level-low {
+    max-width: 15%;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(243, 232, 72) !important;
+}
+
+.card-level-half {
+    max-width: 15%;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px darkgreen !important;
+}
+
+.card-level-hight {
+    max-width: 15%;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(121, 7, 26) !important;
+}
+.card-level-observacion {
+    max-width: 15%;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0, 23, 100) !important;
+    height:inherit;
+}
