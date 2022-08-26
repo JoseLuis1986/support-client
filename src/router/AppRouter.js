@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
-import { ChatPage } from '../pages/ChatPage';
 import { AuthRouter } from './AuthRouter';
+import { DashBoardRoutes } from './DashBoardRoutes';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
@@ -30,9 +30,9 @@ export const AppRouter = () => {
                 }
                 />
 
-                <Route path="/" element={
+                <Route path="/*" element={
                     <PrivateRoute>
-                        <ChatPage />
+                        <DashBoardRoutes/>
                     </PrivateRoute>
                 }
                 />
@@ -40,12 +40,3 @@ export const AppRouter = () => {
         </BrowserRouter>
     )
 }
-
-            // <BrowserRouter>
-            //     <Routes>
-            //         <Route path="/auth/*" element={<AuthRouter/>} />
-            //         <Route path="/" element={<ChatPage />} />
-
-            //         <Route path="*" element={<Navigate replace to="/"/>} />
-            //     </Routes>
-            // </BrowserRouter>

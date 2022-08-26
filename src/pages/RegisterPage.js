@@ -5,6 +5,8 @@ import { AuthContext } from '../auth/AuthContext'
 import { useFormRegister } from '../hooks/useFormRegister'
 
 
+const depto = ['administracion', 'superbancas', 'bigstar', 'gerencia', 'presidencia'];
+
 export const RegisterPage = () => {
 
     const { register } = useContext(AuthContext);
@@ -13,7 +15,8 @@ export const RegisterPage = () => {
     const initialState = {
         name: '',
         email: '',
-        password: ''
+        department: '',
+        password: '',
     }
 
     const [form, handleInputChange] = useFormRegister(initialState);
@@ -22,9 +25,9 @@ export const RegisterPage = () => {
     const onSubmit = async (ev) => {
         ev.preventDefault();
 
-        const { name, email, password } = form;
+        const { name, email, password, department } = form;
 
-        const msg = await register(name, email, password);
+        const msg = await register(name, email, password, department);
 
         if (msg !== true) {
             Swal.fire('Error', msg, 'error');
@@ -71,6 +74,28 @@ export const RegisterPage = () => {
                     onChange={handleInputChange}
 
                 />
+                <span className="focus-input100"></span>
+            </div>
+            <div className="wrap-input100 validate-input mb-3">
+
+                <select 
+                    className="form-select form-select-lg" 
+                    aria-label=".form-select-lg example"
+                    name='department'
+                    value={form.department}
+                    onChange={handleInputChange}
+                    required
+                    >
+                    <option value="" disabled> Seleccione departamento </option>
+                    {
+                        depto.map((dpto) =>
+                            <option key={dpto} value={dpto}>
+                                {dpto}
+                            </option>)
+
+                    }
+                </select>
+
                 <span className="focus-input100"></span>
             </div>
 

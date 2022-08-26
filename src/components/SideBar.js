@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../auth/AuthContext';
+import { ChatContext } from '../context/chat/ChatContext';
+import { GlobalContext } from '../context/Provider';
 import { SibeBarChatItem } from './SibeBarChatItem';
 
 
-const chats = [1,2,3,4,5,6,7,8];
-
 export const SideBar = () => {
+
+    const { chatState } = useContext( ChatContext );
+
+    const { users } = chatState;
+
+    const { auth } = useContext(AuthContext);
+    const { uid } = auth;
+
     return (
         <div className="inbox_chat">
             {
-                chats.map(( chat ) => (
-                    <SibeBarChatItem key={ chat }/>
+                users
+                .filter( user => user.uid !== uid )
+                .map(( users ) => (
+                    <SibeBarChatItem 
+                        key={ users.uid } 
+                        user={ users }
+                    />
                 ))
             }
 

@@ -1,8 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { fetchWithoutToken, fetchWithToken } from "../helpers/fetch";
-
+import { ChatContext } from '../context/chat/ChatContext'
+import { types } from "../types/types";
+import { GlobalContext } from "../context/Provider";
 
 export const AuthContext = createContext();
 
@@ -12,15 +14,21 @@ const initialState = {
     checking: true,
     logged: false,
     name: null,
-    email: null
+    email: null,
+    department: null
 };
 
 export const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState(initialState);
+    const { dispatch } = useContext( ChatContext );
+    // const { chatDispatch } = useContext(GlobalContext);
 
+    
 
     const login = async (email, password) => {
+
+        console.log(email, password)
 
         const resp = await fetchWithoutToken('login', { email, password }, 'POST');
 
@@ -28,14 +36,15 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', resp.token);
 
             const { usuario } = resp;
-            console.log(usuario);
+            // console.log(usuario);
 
             setAuth({
                 uid: usuario.uid,
                 checking: false,
                 logged: true,
                 name: usuario.name,
-                email: usuario.email
+                email: usuario.email,
+                department: usuario.department
             })
             // console.log("Autenticado!!");
         }
@@ -44,9 +53,9 @@ export const AuthProvider = ({ children }) => {
 
     };
 
-    const register = async (name, email, password) => {
+    const register = async (name, email, password, department) => {
 
-        const resp = await fetchWithoutToken('login/new', { name, email, password }, 'POST');
+        const resp = await fetchWithoutToken('login/new', { name, email, password, department }, 'POST');
 
         if (resp.ok) {
             localStorage.setItem('token', resp.token);
@@ -60,7 +69,8 @@ export const AuthProvider = ({ children }) => {
                 checking: false,
                 logged: true,
                 name: usuario.name,
-                email: usuario.email
+                email: usuario.email,
+                department: usuario.department
             })
             // console.log("Autenticado!!");
 
@@ -81,7 +91,8 @@ export const AuthProvider = ({ children }) => {
                 checking: false,
                 logged: false,
                 name: null,
-                email: null
+                email: null,
+                department: null
             })
 
             return false;
@@ -99,7 +110,8 @@ export const AuthProvider = ({ children }) => {
                 checking: false,
                 logged: true,
                 name: usuario.name,
-                email: usuario.email
+                email: usuario.email,
+                department: usuario.department
             })
             console.log("Autenticado!!");
             return true;
@@ -109,7 +121,8 @@ export const AuthProvider = ({ children }) => {
                 checking: false,
                 logged: false,
                 name: null,
-                email: null
+                email: null,
+                department: null
             })
 
             return false;
@@ -120,10 +133,14 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('token');
+
+        dispatch({ type: types.closeSession });
+
         setAuth({
             checking: false,
             logged: false
-        })
+        });
+
     }
 
 
